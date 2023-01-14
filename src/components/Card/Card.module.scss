@@ -1,0 +1,40 @@
+.card {
+    .favourite {
+      position: absolute;
+      cursor: pointer;
+    }
+  
+    border: 1px solid #f3f3f3;
+    padding: 30px;
+    width: 220px;
+    border-radius: 40px;
+    margin-right: 30px;
+    transition: box-shadow 0.23s ease-in-out,
+    transform 0.23s ease-in-out;
+
+    span {
+      text-transform: uppercase;
+      opacity: 0.5;
+      font-size: 12px;
+    }
+
+    .plus{
+      cursor: pointer;
+    }
+  
+    b {
+      font-size: 12px;
+    }
+  
+    h5 {
+      font-weight: 400;
+      font-size: 14px;
+    }
+  }
+
+  .card:hover {
+    border: 1px solid #F8F8F8;
+    box-shadow: 0px 14px 30px rgba(0, 0, 0, 0.07);
+    border: 1px solid #F8F8F8;
+    transform: translateY(-10px)
+  }
