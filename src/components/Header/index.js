@@ -1,4 +1,5 @@
-export function Header() {
+export function Header(props) {
+    console.log(props)
     return (
         <header className="d-flex justify-between align-center p-40">
             <div className="d-flex align-center">
@@ -9,7 +10,7 @@ export function Header() {
                 </div>
             </div>
             <ul className="d-flex">
-                <li className="mr-40 ">
+                <li onClick={props.onClickCart} className="mr-40 cu-p">
                     <img width={18} height={18} src="img/basket.svg" alt="" />
                     <span>1205</span>
                 </li>

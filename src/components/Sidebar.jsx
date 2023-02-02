@@ -1,41 +1,44 @@
-export function Sidebar() {
+export function Sidebar({ onClose, items = [], onDelete }) {
+
+  const hangleDeleteCart = (obj) => {
+    onDelete(obj)
+    console.log(obj)
+  }
+
   return (
-    <div className="overlay">
+    <div className="  overlay">
       <div className="sidebar">
-        <h2 className="mb-30">Корзина</h2>
+        <h2 className="d-flex justify-around mb-30">
+          Корзина{" "}
+          <img
+            className="cu-p"
+            src="img/btn-remove.svg"
+            alt=""
+            onClick={onClose}
+          />
+        </h2>
 
         <div className="items">
-          <div className="cart-item d-flex align-center mb-25">
-            <div
-              style={{ backgroundImage: "url(img/sneakers/1.jpg)" }}
-              className="cart-item__img"
-            ></div>
-            <div className="mr-20 flex">
-              <p className="">Мужские Кроссовки Nike Air Max 270</p>
-              <b>12 999 руб.</b>
-            </div>
-            <img
-              className="remove-btn mr-20"
-              src="img/btn-remove.svg"
-              alt="Add"
-            />
-          </div>
-
-          <div className="cart-item d-flex align-center mb-25">
-            <div
-              style={{ backgroundImage: "url(img/sneakers/1.jpg)" }}
-              className="cart-item__img"
-            ></div>
-            <div className="mr-20 flex">
-              <p className="">Мужские Кроссовки Nike Air Max 270</p>
-              <b>12 999 руб.</b>
-            </div>
-            <img
-              className="remove-btn mr-20"
-              src="img/btn-remove.svg"
-              alt="Add"
-            />
-          </div>
+          {
+            items.map((obj) => (
+              <div className="cart-item d-flex align-center mb-25">
+                <div
+                  style={{ backgroundImage: `url(${obj.imageUrl})` }}
+                  className="cart-item__img"
+                ></div>
+                <div className="mr-20 flex">
+                  <p className="">{obj.title}</p>
+                  <b>{obj.price}</b>
+                </div>
+                <img
+                  onClick={hangleDeleteCart(obj)}
+                  className="remove-btn mr-20"
+                  src="img/btn-remove.svg"
+                  alt="Add"
+                />
+              </div>
+            ))
+          }
         </div>
       </div>
     </div>
