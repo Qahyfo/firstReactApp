@@ -33,7 +33,8 @@ function App() {
   const [cartOpened, setCartOpened] = useState(false)
   const [items, setItems] = useState([]) // Хранение карточек
   const [cartItems, setCartItems] = useState([])
-  const [delCart, setDelCart] = useState([])
+  const [searchValue, setSeacrchValue] = useState('')
+
 
   useEffect(() => {
     fetch('https://63c90f1d904f040a965532bc.mockapi.io/items').then((res) => {
@@ -47,32 +48,35 @@ function App() {
     setCartItems(prev => [...prev, obj])
   }
 
-  const onDeleteToCart = (obj) => {
-
+  const onChangeSearchInput = (event) => {
+    setSeacrchValue(event.target.value)
   }
 
   return (
     <div className="wrapper clear" >
       <Header onClickCart={() => setCartOpened(true)} />
-      {cartOpened ? <Sidebar items={cartItems} onDelete={onDeleteToCart}
+      {cartOpened ? <Sidebar items={cartItems}
         onClose={() => { setCartOpened(false) }} /> : null}
       <div className="content p-40">
         <div className="d-flex justify-between align-center mb-40">
-          <h1 className="">Все кроссовки</h1>
+          <h1 className="" >{searchValue ? `Поиск по запросу ${searchValue}` : "Все кросовки"}</h1>
           <div className="search-block d-flex">
             <img src="/img/search.svg" alt="search" />
-            <input placeholder="Поиск" />
+            {searchValue && <img className="cu-p clear" src="img/btn-remove.svg" alt="" onClick={() => setSeacrchValue('')} />}
+            <input value={searchValue} onChange={onChangeSearchInput} placeholder="Поиск" />
           </div>
         </div>
 
         <div className="d-flex">
-          {items.map((obj) => (
-            <Card onClick={() => console.log(obj)}
-              title={obj.title}
-              price={obj.price}
-              onPlus={(obj) => onAddToCart(obj)}
-              imageUrl={obj.imageUrl} />
-          ))}
+          {items.filter((item) => item.title.toLowerCase().includes(searchValue.toLowerCase()))
+            .map((obj, index) => (
+              <Card onClick={() => console.log(obj)}
+                key={index}
+                title={obj.title}
+                price={obj.price}
+                onPlus={(obj) => onAddToCart(obj)}
+                imageUrl={obj.imageUrl} />
+            ))}
         </div>
 
       </div>

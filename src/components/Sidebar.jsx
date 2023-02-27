@@ -1,9 +1,5 @@
 export function Sidebar({ onClose, items = [], onDelete }) {
 
-  const hangleDeleteCart = (obj) => {
-    onDelete(obj)
-    console.log(obj)
-  }
 
   return (
     <div className="  overlay">
@@ -31,7 +27,6 @@ export function Sidebar({ onClose, items = [], onDelete }) {
                   <b>{obj.price}</b>
                 </div>
                 <img
-                  onClick={hangleDeleteCart(obj)}
                   className="remove-btn mr-20"
                   src="img/btn-remove.svg"
                   alt="Add"
