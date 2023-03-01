@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useState } from "react";
 import React from "react";
+import axios from "axios";
 import { Card } from "./components/Card"
 import { Header } from "./components/Header"
 import { Sidebar } from "./components/Sidebar";
@@ -37,10 +38,8 @@ function App() {
 
 
   useEffect(() => {
-    fetch('https://63c90f1d904f040a965532bc.mockapi.io/items').then((res) => {
-      return res.json()
-    }).then((json) => {
-      setItems(json)
+    axios.get('https://63c90f1d904f040a965532bc.mockapi.io/items').then(res => {
+      setItems(res.data)
     })
   }, []);
 
